@@ -18,6 +18,7 @@ A simple service for meeting room reservation design
 
  * Expose your service on the internet via restful API by leveraging on `Spring Boot`
  * Persist your data under MySQL (why you need this?) - `JPA` under `Spring Boot`
+ * Can we support holiday mode & meeting room maintenance?
  * [*] Is your system able to accept the request under an multi-thread environment?
 
 ## Checkpoints
