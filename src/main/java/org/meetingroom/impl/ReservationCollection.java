@@ -16,10 +16,8 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class ReservationCollection {
-
     private final Map<String, Reservation> allReservation;
     private final Map<LocalDate, ReservationCollectionPerDay> data;
     private final MeetingRoom room;
@@ -158,7 +156,7 @@ public class ReservationCollection {
                 );
             }
         }
-        return answer;
+        return TimeUtils.merge(answer);
     }
 
     @Data

@@ -31,7 +31,24 @@ public class ReservationServiceTest {
         LocalDateTime fourClock = now.plus(4, ChronoUnit.HOURS);
         LocalDateTime sixClock = now.plus(6, ChronoUnit.HOURS);
 
+        LocalDateTime nextDay = now.plusDays(1);
+        LocalDateTime nextOneClock = nextDay.plus(1, ChronoUnit.HOURS);
+        LocalDateTime nextTwoClock = nextDay.plus(2, ChronoUnit.HOURS);
+        LocalDateTime nextThreeClock = nextDay.plus(3, ChronoUnit.HOURS);
+        LocalDateTime nextThreeHalfClock = nextDay.plus(3, ChronoUnit.HOURS).plus(30, ChronoUnit.MINUTES);
+        LocalDateTime nextFourClock = nextDay.plus(4, ChronoUnit.HOURS);
+        LocalDateTime nextSixClock = nextDay.plus(6, ChronoUnit.HOURS);
+
         reservationService.reserve(user, meetingRoom, twoClock, threeHalfClock);
-        Assertions.assertFalse(reservationService.getMeetingRoomSchedule(meetingRoom, now, sixClock).isEmpty());
+
+        Assertions.assertEquals(1, reservationService.getMeetingRoomSchedule(meetingRoom, now, sixClock).size());
+        Assertions.assertEquals(twoClock, reservationService.getMeetingRoomSchedule(meetingRoom, now, sixClock).get(0).getFromTimestamp());
+        Assertions.assertEquals(threeHalfClock, reservationService.getMeetingRoomSchedule(meetingRoom, now, sixClock).get(0).getToTimestamp());
+
+        reservationService.reserve(user, meetingRoom, fourClock, nextThreeClock);
+
+        Assertions.assertEquals(2, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).size());
+        Assertions.assertEquals(fourClock, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).get(1).getFromTimestamp());
+        Assertions.assertEquals(nextThreeClock, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).get(1).getToTimestamp());
     }
 }

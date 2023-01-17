@@ -46,11 +46,12 @@ public class ReservationCollectionPerDay {
     public List<ReservationCollection.TimeRange> getReservedTimeRanges(LocalDateTime fromTimestamp, LocalDateTime toTimestamp) {
         Preconditions.checkArgument(TimeUtils.sameDay(day, fromTimestamp));
         Preconditions.checkArgument(TimeUtils.sameDay(day, toTimestamp));
-        return segmentTree.getAllAdded().stream().map(
+        List<ReservationCollection.TimeRange> unmerged = segmentTree.getAllAdded().stream().map(
             segmentNode -> new ReservationCollection.TimeRange(
                 TimeUtils.getStartOfDay(day).plusMinutes(segmentNode.left),
                 TimeUtils.getStartOfDay(day).plusMinutes(segmentNode.right)
             )
         ).filter(timeRange -> timeRange.inRangeOf(fromTimestamp, toTimestamp)).toList();
+        return TimeUtils.merge(unmerged);
     }
 }

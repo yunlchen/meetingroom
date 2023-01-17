@@ -34,6 +34,8 @@ public class ReservationCollectionPerDayTest {
         Assertions.assertFalse(reservationCollectionPerDay.checkAvailable(twoClock, fourClock));
         Assertions.assertTrue(reservationCollectionPerDay.checkAvailable(threeHalfClock, fourClock));
 
-        Assertions.assertFalse(reservationCollectionPerDay.getReservedTimeRanges(now, fourClock).isEmpty());
+        Assertions.assertEquals(1, reservationCollectionPerDay.getReservedTimeRanges(now, fourClock).size());
+        Assertions.assertEquals(oneClock, reservationCollectionPerDay.getReservedTimeRanges(now, fourClock).get(0).getFromTimestamp());
+        Assertions.assertEquals(threeClock, reservationCollectionPerDay.getReservedTimeRanges(now, fourClock).get(0).getToTimestamp());
     }
 }
