@@ -2,9 +2,7 @@
 
 ---
 
-```
-A simple service for meeting room reservation design
-```
+> A simple service for meeting room reservation design
 
 ## System design in object oriented method
 
@@ -31,3 +29,9 @@ A simple service for meeting room reservation design
 * Run project
   * Run 'Hello world!' in your local IJ
   * Run gradle command `gradle clean build` in your terminal
+
+## Tips
+
+ * Command line for calc code line number
+   * `find . -name '*.java' | xargs cat | wc -l`
+
