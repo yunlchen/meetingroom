@@ -50,5 +50,8 @@ public class ReservationServiceTest {
         Assertions.assertEquals(2, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).size());
         Assertions.assertEquals(fourClock, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).get(1).getFromTimestamp());
         Assertions.assertEquals(nextThreeClock, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).get(1).getToTimestamp());
+
+        Assertions.assertNull(reservationService.reserve(user, meetingRoom, nextOneClock, nextTwoClock));
+        Assertions.assertEquals(2, reservationService.getMeetingRoomSchedule(meetingRoom, now, nextSixClock).size());
     }
 }
